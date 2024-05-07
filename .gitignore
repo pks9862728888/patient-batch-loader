@@ -60,6 +60,8 @@ local.properties
 *.ids
 *.orig
 classes/
+h2db/
+logs/
 
 ######################
 # Visual Studio Code
