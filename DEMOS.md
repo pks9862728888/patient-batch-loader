@@ -229,11 +229,11 @@ I'm going to walk you through the creation of the BatchConfiguration class. Agai
     }
     ```
 17. I've configured the job repository to be created using a JobRepositoryFactoryBean. I set the batch data source and batch transaction manager to be used by the repository. Then, I call after properties set to ensure dependencies have been set. 
-18. The final step is to configure a method to be called after dependency injection has been performed by the Spring container. This method will handle the actual configuration of the bean:
+18. The final step is to configure a method to be called after dependency injection has been performed by the Spring container. This method will handle the actual bean configuration:
     ```
     import javax.annotation.PostConstruct;
     import org.springframework.batch.core.explore.support.JobExplorerFactoryBean;
-    
+
     @PostConstruct
     public void afterPropertiesSet() throws Exception {
         this.jobRepository = createJobRepository();
@@ -669,11 +669,9 @@ With the BatchJobConfiguration class defined, we simply want to start unit testi
     import org.springframework.boot.test.context.SpringBootTest;
     import org.springframework.test.context.junit4.SpringRunner;
     import com.pluralsight.springbatch.patientbatchloader.PatientBatchLoaderApp;
-    import org.springframework.test.context.ActiveProfiles;
     
     @RunWith(SpringRunner.class)
     @SpringBootTest(classes = PatientBatchLoaderApp.class)
-    @ActiveProfiles("dev")
     ```
 4. Next, autowire the configured job bean.
     ```
@@ -738,8 +736,6 @@ Now that the job is configured and unit tested, I want to verify job execution. 
     import org.springframework.http.ResponseEntity;
     import org.springframework.web.bind.annotation.GetMapping;
     import org.springframework.web.bind.annotation.PathVariable;
-    import java.util.Map;
-    import java.util.HashMap;
     
     @GetMapping("/{fileName:.+}")
     public ResponseEntity<String> runJob(@PathVariable String fileName) {
@@ -906,7 +902,6 @@ In this demo, I'll show you how to implement a stubbed out processor and writer 
     ```
     import org.springframework.batch.item.support.PassThroughItemProcessor;
     import org.springframework.batch.item.ItemWriter;
-    import java.util.List;
 
     @Bean
     @StepScope
@@ -1556,4 +1551,3 @@ With the item reader, processor and writer in place, let's try to execute the fu
 11. If I scroll to the bottom, I see that the job processed successfully and I have a total of 1000 rows in the database table.  
 
 That completes the execution of the full batch job.  
-

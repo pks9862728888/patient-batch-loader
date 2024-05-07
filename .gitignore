@@ -79,6 +79,7 @@ logs/
 ######################
 .gradle/
 /build/
+out/
 
 ######################
 # Package Files

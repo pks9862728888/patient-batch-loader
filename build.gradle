@@ -3,13 +3,14 @@ import org.gradle.internal.os.OperatingSystem
 buildscript {
     repositories {
         mavenLocal()
+        mavenCentral()
         jcenter()
-        maven { url "http://repo.spring.io/plugins-release" }
+        maven { url "https://repo.spring.io/plugins-snapshot" }
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
         classpath "org.springframework.boot:spring-boot-gradle-plugin:${spring_boot_version}"
-        classpath "io.spring.gradle:propdeps-plugin:0.0.9.RELEASE"
+        classpath "io.spring.gradle:propdeps-plugin:0.0.8-SNAPSHOT"
     }
 }
 
@@ -136,9 +137,7 @@ dependencies {
         exclude module: 'spring-boot-starter-tomcat'
     }
     compile "org.springframework.boot:spring-boot-starter-undertow"
-
-	// Starter to include the Spring Batch dependencies via Spring Boot
-	compile "org.springframework.boot:spring-boot-starter-batch"
+    compile "org.springframework.boot:spring-boot-starter-batch"
 
     testCompile ("org.springframework.boot:spring-boot-starter-test") {
         exclude group: 'com.vaadin.external.google', module: 'android-json'
@@ -149,7 +148,7 @@ dependencies {
     testCompile "org.mockito:mockito-core"
     testCompile "com.mattbertolini:liquibase-slf4j:${liquibase_slf4j_version}"
     testCompile "org.hamcrest:hamcrest-library"
-	testCompile "org.springframework.batch:spring-batch-test"
+    testCompile "org.springframework.boot:spring-batch-test"
 
     optional ("org.springframework.boot:spring-boot-configuration-processor") {
         exclude group: 'com.vaadin.external.google', module: 'android-json'
